@@ -10,7 +10,7 @@ Please see https://git.k8s.io/community/CLA.md for more info.
 
 ## Prerequisites
 
-- [go](https://golang.org/dl/) version v1.15+.
+- [go](https://golang.org/dl/) version v1.16+.
 - [docker](https://docs.docker.com/install/) version 17.03+.
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) version v1.11.3+.
 - [kustomize](https://sigs.k8s.io/kustomize/docs/INSTALL.md) v3.1.0+
@@ -95,8 +95,8 @@ separately.
 
 The docs are published off of three branches:
 
-- `book-v2`: [book.kubebuilder.io](https://book.kubebuilder.io) -- current
-  docs
+- `book-v3`: [book.kubebuilder.io](https://book.kubebuilder.io) -- current docs
+- `book-v2`: [book-v2.kubebuilder.io](https://book.kubebuilder.io) -- legacy docs
 - `book-v1`:
   [book-v1.book.kubebuilder.io](https://book-v1.book.kubebuilder.io) --
   legacy docs

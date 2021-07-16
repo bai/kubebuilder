@@ -58,7 +58,7 @@ func markerTemplate(marker *MarkerDoc) toHTML {
 
 	// the marker name
 	term := dt(classes{"literal", "name"},
-		Text(marker.Name))
+		Text("// +"+marker.Name))
 
 	// the args summary (displayed in summary mode)
 	var fields []toHTML
@@ -256,9 +256,9 @@ func main() {
 	if err := plugin.Run(MarkerDocs{
 		Args: map[string][]string{
 			// marker args
-			"": []string{"-wwww", "crd", "webhook", "rbac:roleName=cheddar" /* role name doesn't mean anything here */, "object", "schemapatch:manifests=."},
+			"": {"-wwww", "crd", "webhook", "rbac:roleName=cheddar" /* role name doesn't mean anything here */, "object", "schemapatch:manifests=."},
 			// cli options args
-			"CLI: ": []string{"-hhhh"},
+			"CLI: ": {"-hhhh"},
 		},
 	}, os.Stdin, os.Stdout, os.Args[1:]...); err != nil {
 		log.Fatal(err.Error())

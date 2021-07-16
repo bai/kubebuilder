@@ -85,10 +85,20 @@ golangci-lint:
 	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(shell dirname $(GOLANGCI_LINT)) v1.37.1 ;\
 	}
 
+.PHONY: apidiff
+apidiff: go-apidiff ## Run the go-apidiff to verify any API differences compared with origin/master
+	$(GO_APIDIFF) master --compare-imports --print-compatible --repo-path=.
+
+GO_APIDIFF = $(shell pwd)/bin/go-apidiff
+go-apidiff:
+	@[ -f $(GO_APIDIFF) ] || { \
+	cd tools && go build -tags=tools -o $(GO_APIDIFF) github.com/joelanford/go-apidiff ;\
+	}
+
 ##@ Tests
 
 .PHONY: test
-test: test-unit test-integration test-testdata ## Run the unit and integration tests (used in the CI)
+test: test-unit test-integration test-testdata test-book ## Run the unit and integration tests (used in the CI)
 
 .PHONY: test-unit
 test-unit: ## Run the unit tests
@@ -119,3 +129,7 @@ test-e2e-local: ## Run the end-to-end tests locally
 .PHONY: test-e2e-ci
 test-e2e-ci: ## Run the end-to-end tests (used in the CI)`
 	./test/e2e/ci.sh
+
+.PHONY: test-book
+test-book: ## Run the cronjob tutorial's unit tests to make sure we don't break it
+	cd ./docs/book/src/cronjob-tutorial/testdata/project && make test

@@ -1,3 +1,5 @@
+// +build tools
+
 /*
 Copyright 2021 The Kubernetes Authors.
 
@@ -14,20 +16,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package configgen_test
-
+package tools
 import (
-	"testing"
-
-	configgen "sigs.k8s.io/kubebuilder/v3/pkg/cli/alpha/config-gen"
-	"sigs.k8s.io/kustomize/kyaml/fn/framework/frameworktestutil"
+	_ "github.com/joelanford/go-apidiff"
 )
-
-func TestNewCommand(t *testing.T) {
-	test := frameworktestutil.CommandResultsChecker{
-		Command: configgen.NewCommand,
-		// Uncomment this line to update the testdata directory
-		// UpdateExpectedFromActual: true,
-	}
-	test.Assert(t)
-}
